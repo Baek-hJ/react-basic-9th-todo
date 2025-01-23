@@ -1,4 +1,4 @@
-// src/components/TodoList.jsx
+// src/App.jsx
 
 import TodoList from "./components/TodoList";
 
