@@ -8,4 +8,4 @@ const TodoForm = ({handleSubmit,todoText,handleChangeTodoText,}) => {
     )
 }
 
-export default TodoForm
+export default TodoForm;
