@@ -56,6 +56,18 @@ const TodoList = () => {
         setTodos(updateTodos);
     }
 
+    const handleDelete = (id) => {
+        const updatedTodos = todos.filter((todo) => {
+            if (todo.id === id) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        setTodos(updatedTodos);
+    };
+
     return (
         // return (소괄호) 안에는 하나의 태그만 들어갈 수 있어서 div로 감싸줌줌
         <div>
@@ -73,6 +85,8 @@ const TodoList = () => {
                             >{text}</p>
                         <button onClick={ () => handleToggleCompleted(id)}>
                             {completed ? "취소하기" : "완료하기"}</button>
+                            
+                        <button onClick={() => handleDelete(id)}>삭제하기</button>
                     </li>
                 ))}
             </ul>
