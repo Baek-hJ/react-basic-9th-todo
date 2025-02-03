@@ -1,6 +1,7 @@
 // src/components/TodoList.jsx
 
 import { useState } from "react";
+import TodoItem from "./todo/TotoItem";
 
 const SAMPLE_TODOS = [
     { id: 1, text: "Buy milk", completed: false },
@@ -60,17 +61,6 @@ const TodoList = () => {
         setTodos((prev) => prev.filter((todo) =>  todo.id !== id))
 };
 
-    // const handleDelete = (id) => {
-    //     const updatedTodos = todos.filter((todo) => {
-    //         if (todo.id === id) {
-    //             return false;
-    //         } else {
-    //             return true;
-    //         }
-    //     });
-
-    //     setTodos(updatedTodos);
-    // }
 
     return (
         // return (소괄호) 안에는 하나의 태그만 들어갈 수 있어서 div로 감싸줌줌
@@ -82,16 +72,14 @@ const TodoList = () => {
             {/* ul, li 태그로 시맨틱한 리스트 작성 */}
             <ul>
                 {todos.map(({ id, text, completed}) => (
-                    <li key={id}>
-                        <p style={{
-                            textDecoration: completed ? "line-through" : "none"
-                            }}
-                            >{text}</p>
-                        <button onClick={ () => handleToggleCompleted(id)}>
-                            {completed ? "취소하기" : "완료하기"}</button>
-                            
-                        <button onClick={() => handleDelete(id)}>삭제하기</button>
-                    </li>
+                    <TodoItem
+                    key = {id} 
+                    completed = {completed} 
+                    text = {text} 
+                    handleToggleCompleted = {handleToggleCompleted}
+                    handleDelete = {handleDelete}
+                    id = {id}
+                    />
                 ))}
             </ul>
         </div>
