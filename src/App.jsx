@@ -1,12 +1,12 @@
 // src/App.jsx
 
 import TodoContainer from "./components/todo/TodoContainer";
-
+import RootLayout from "./layout/RootLayout";
 const App = () => {
   return (
-    <main className="main-center">
+    <RootLayout>
       <TodoContainer />
-    </main>
+    </RootLayout>
   );
 };
 
