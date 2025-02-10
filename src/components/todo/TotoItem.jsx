@@ -11,8 +11,9 @@ const TodoItem = ({
         <li>
         <p style={{
             textDecoration: completed ? "line-through" : "none"
-            }}
-            >{text}</p>
+        }}>
+            {text}
+        </p>
         <button onClick={ () => handleToggleCompleted(id)}>
             {completed ? "취소하기" : "완료하기"}</button>
             
