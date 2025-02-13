@@ -58,7 +58,7 @@ const TodoDashboardCardList = styled.ul`
 `;
 
 const TodoDashboardCardWrapper = styled.li`
-    flex: ${(props) => props.$flex};
+    flex: ${({ $flex = 1 }) => $flex};
 `;
 
 const TodoDashboardCard = styled.button`
@@ -66,7 +66,7 @@ const TodoDashboardCard = styled.button`
     flex-direction: column;
     width: 100%;
     height: 184px;
-    background-color: #e6582b;
+    background-color: ${({ $bgColor = "#e6582b" }) => $bgColor} ;
     justify-content: space-between;
     color: white;
     padding: 1.2rem;

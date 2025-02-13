@@ -3,7 +3,8 @@
 import styled from "styled-components";
 import TodoItem from "./TotoItem";
 
-const TodoList = ({ todos, handleToggleCompleted, handleDelete }) => {
+
+const TodoList = ({ todos, toggleTodoCompleted, deletTodo }) => {
     return (
         // return (소괄호) 안에는 하나의 태그만 들어갈 수 있어서 div로 감싸줌줌
         <TodoListSection>
@@ -15,8 +16,8 @@ const TodoList = ({ todos, handleToggleCompleted, handleDelete }) => {
                         key={id}
                         completed={completed}
                         text={text}
-                        handleToggleCompleted={handleToggleCompleted}
-                        handleDelete={handleDelete}
+                        toggleTodoCompleted={toggleTodoCompleted}
+                        deletTodo={deletTodo}
                         id={id}
                     />
                 ))}
