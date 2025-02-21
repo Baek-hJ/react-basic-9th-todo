@@ -10,6 +10,12 @@ const TodoProvider = ({ children }) => {
     setTodos(data);
   }
 
+  const getTodoItem = async (id) => {
+    const { data } = await todoClient.get(`/${id}`);
+
+    return data;
+  }
+
   const addTodos = async (text) => {
     const { data } = await todoClient.get("/", {
       text,
@@ -21,22 +27,22 @@ const TodoProvider = ({ children }) => {
   };
 
   const toggleTodoCompleted = async (id, currentCompleted) => {
-    const {data} = await todoClient.patch(`/${id}`, {
+    const { data } = await todoClient.patch(`/${id}`, {
       completed: !currentCompleted,
-  });
+    });
 
-  await getTodos();
+    await getTodos();
 
-return data;
-};
+    return data;
+  };
 
-const deleteTodo = async (id) => {
-  const { data } = await todoClient.delete(`/${id}`);
+  const deleteTodo = async (id) => {
+    const { data } = await todoClient.delete(`/${id}`);
 
-  await getTodos();
+    await getTodos();
 
-  return data;
-}
+    return data;
+  }
 
   const getFilteredTodos = (selectedFilter) => {
     if (selectedFilter === "completed") {
@@ -51,14 +57,15 @@ const deleteTodo = async (id) => {
   };
 
   // 전체가 아닌 소량의 데이터만 가져올때 map으로
-  useEffect (() => {
+  useEffect(() => {
     getTodos();
-  },[]);
+  }, []);
 
   return (
     <TodoContext.Provider
       value={{
         todos,
+        getTodoItem,
         addTodos,
         toggleTodoCompleted,
         deleteTodo,
