@@ -1,73 +1,71 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
-import { ActionButton } from "./TotoItem";
+import { ActionButton } from "./TodoItem";
+import { TodoContext } from "../../context/TodoContext";
 
-const TodoForm = ({ addTodos }) => {
-    // 새로운 투두의 입력을 상태로 관리
-    const [todoText, setTodoText] = useState(""); // 상태 변수 이름을 수정
+const TodoForm = () => {
+  const { addTodos } = useContext(TodoContext);
+  const [todoText, setTodoText] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    // 인풋의 value를 가져와서 todoText의 상태를 변경시켜주는 함수수
-    const handleChangeTodoText = (e) => {
-        setTodoText(e.target.value);
-    };
+    if (!todoText.trim()) {
+      return;
+    }
 
-    // 인풋에 입력 또는 공백이면 실행시키지 않는 함수
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    addTodos(todoText);
 
-        // trim() todoList 앞뒤 공백을 제거하고, 비어있으면 아무 것도 하지 않음
-        if (!todoText.trim()) {
-            return;
-        }
-        addTodos(todoText);
+    setTodoText("");
+  };
 
-        setTodoText("");
-    };
+  const handleChangeTodoText = (e) => {
+    setTodoText(e.target.value);
+  };
 
-    return (
-        <TodoFormWrapper onSubmit={handleSubmit}>
-            <TodoFormInput 
-            type="text" 
-            value={todoText} 
-            onChange={handleChangeTodoText} 
-            placeholder="할 일을 입력하세요"
-            />
-            <SubmitButton type="submit" $bgColor="#582be6">
-                제출하기
-            </SubmitButton>
-        </TodoFormWrapper>
-    )
+  return (
+    <TodoFormWrapper onSubmit={handleSubmit}>
+      <TodoFormInput
+        type="text"
+        value={todoText}
+        onChange={handleChangeTodoText}
+        placeholder="할 일을 입력하세요"
+      />
+      <SubmitButton type="submit" $bgColor="#582be6">
+        제출하기
+      </SubmitButton>
+    </TodoFormWrapper>
+  );
 };
 
 const TodoFormWrapper = styled.form`
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 `;
 
 const TodoFormInput = styled.input`
-    padding: 0%.5rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    background-color: white;
-    flex: 8;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: white;
+  flex: 8;
 
-    &::placeholder {
-        color: #aaa;
+  &::placeholder {
+    color: #aaa;
+  }
 
-    }
-
-    &:focus {
-        border-color: #582be6;
-        outline: none;
-    }
+  &:focus {
+    border-color: #582be6;
+    outline: none;
+  }
 `;
 
 const SubmitButton = styled(ActionButton)`
-    flex: 1;
-    text-align: center;
+  flex: 1;
+  text-align: center;
 `;
 
 export default TodoForm;

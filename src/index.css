@@ -1,10 +1,7 @@
-/* index.css */
-
-.main-center { 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
-/* 화면 비율 100% */
-
-};
+.main-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

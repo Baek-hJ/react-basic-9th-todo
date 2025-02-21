@@ -1,17 +1,20 @@
+import { Outlet } from "react-router";
 import styled from "styled-components";
 
-const RootLayout = ({children}) => {
+// Compositional Layout
+const RootLayout = () => {
   return (
-<MainContainer>
-  <MainContent> {children} </MainContent>
-</MainContainer>
-  )
+    <MainContainer>
+      <MainContent>
+        <Outlet />
+      </MainContent>
+    </MainContainer>
+  );
 };
 
 const MainContainer = styled.main`
   min-height: 100vh;
   background-color: #f6f5f8;
-
 `;
 
 const MainContent = styled.div`
@@ -19,6 +22,5 @@ const MainContent = styled.div`
   margin: 0 auto;
   padding: 1rem;
 `;
-
 
 export default RootLayout;
