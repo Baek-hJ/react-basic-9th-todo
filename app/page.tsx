@@ -1,8 +1,13 @@
+import TodoList from '@/components/todo/TodoList';
 import React from 'react'
 
 const HomePage = () => {
   return (
-    <div>page</div>
+    <section>
+      <div className='container p-2 mx-auto'>
+        <TodoList />
+      </div>
+    </section>
   )
 }
 
