@@ -21,7 +21,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
       <div>
         <button onClick={() => toggleTodoCompleted(id, !completed)}>
-          {completed ? "취소" : "완료료"}
+          {completed ? "취소" : "완료"}
         </button>
         <button onClick={() => deleteTodo(id)}>삭제하기</button>
       </div>
