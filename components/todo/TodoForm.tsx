@@ -9,7 +9,7 @@ const TodoForm = () => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const todoText = FormData.get("todo-text") as string;
+    const todoText = formData.get("todo-text") as string;
   
     await createTodo(todoText);
 
