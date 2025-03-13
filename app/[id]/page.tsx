@@ -1,11 +1,20 @@
-import React from 'react'
+import { getTodoItem } from "@/api/todo-api";
+import TodoItem from "@/components/todo/TodoItem";
+import React from "react";
 
-inter
-
-const page = () => {
-  return (
-    <div>page</div>
-  )
+interface DetailPageProps {
+  params: Promise<{ id: string }>;
 }
 
-export default page
+const DetailPage = async ({ params }: DetailPageProps) => {
+  const { id } = await params;
+  const todoItem = await getTodoItem(id);
+
+  return (
+    <section>
+      <TodoItem todo={todoItem} />
+    </section>
+  );
+};
+
+export default DetailPage;
