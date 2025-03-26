@@ -1,13 +1,17 @@
-import { getTodos } from "@/api/todo-api";
+"use client";
+
 import React from "react";
 import TodoItem from "./TodoItem";
+import { useTodosQuery } from "@/query/useTodoQuery";
+import { useTodoFilterStore } from "@/store/useTodoFilterStore";
 
-const TodoList = async () => {
-  const todos = await getTodos();
+const TodoList = () => {
+  const { filter } = useTodoFilterStore();
+  const { data: todos } = useTodosQuery(filter);
 
   return (
-    <ul>
-      {todos.map((todo) => (
+    <ul className="space-y-2">
+      {todos?.map((todo) => (
         <li key={todo.id}>
           <TodoItem todo={todo} />
         </li>

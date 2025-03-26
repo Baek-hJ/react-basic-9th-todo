@@ -1,29 +1,49 @@
 "use client";
 
-import { deleteTodo, toggleTodoCompleted } from "@/api/todo-api";
+import { cn } from "@/lib/utils";
+import { useToggleTodoMutation } from "@/query/useTodoMutation";
 import { Todo } from "@/types/todo.type";
+import { CheckedState } from "@radix-ui/react-checkbox";
 import Link from "next/link";
-import React from "react";
+import { useId } from "react";
+import { Checkbox } from "../ui/checkbox";
+import TodoDeleteButton from "./TodoDeleteButton";
 
 interface TodoItemProps {
   todo: Todo;
 }
 
 const TodoItem = ({ todo }: TodoItemProps) => {
-  const { completed, id, text } = todo;
+  const { mutate: toggleTodoCompleted } = useToggleTodoMutation();
+  const { completed, id, title } = todo;
+  const checkboxId = useId();
+
+  const onCheckedChange = (checked: CheckedState) => {
+    if (checked === "indeterminate") return;
+
+    toggleTodoCompleted({ id, completed: checked });
+  };
 
   return (
-    <article>
-      <Link href={`/${id}`}>
-      <h2>{text}</h2>
-      </Link>
-      <p>{completed ? "완료" : "미완료"}</p>
+    <article className="flex flex-row items-center justify-between p-4 rounded-md border">
+      <div className="flex flex-row gap-4 items-center">
+        <Checkbox
+          id={checkboxId}
+          checked={completed}
+          onCheckedChange={onCheckedChange}
+        />
+        <Link
+          href={`/${id}`}
+          className={cn("hover:underline", {
+            "line-through": completed,
+          })}
+        >
+          <h2>{title}</h2>
+        </Link>
+      </div>
 
-      <div>
-        <button onClick={() => toggleTodoCompleted(id, !completed)}>
-          {completed ? "취소" : "완료"}
-        </button>
-        <button onClick={() => deleteTodo(id)}>삭제하기</button>
+      <div className="space-x-2">
+        <TodoDeleteButton id={id} />
       </div>
     </article>
   );

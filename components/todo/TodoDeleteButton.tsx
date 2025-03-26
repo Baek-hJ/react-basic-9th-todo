@@ -1,0 +1,48 @@
+"use client";
+
+import { Trash2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
+import { useDeleteTodoMutation } from "@/query/useTodoMutation";
+import { Todo } from "@/types/todo.type";
+
+interface TodoDeleteButtonProps {
+  id: Todo["id"];
+}
+
+const TodoDeleteButton = ({ id }: TodoDeleteButtonProps) => {
+  const { mutate: deleteTodo } = useDeleteTodoMutation();
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive" size="icon">
+          <Trash2 />
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>정말로 삭제하시겠습니까?</AlertDialogTitle>
+          <AlertDialogDescription className="hidden"></AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>취소</AlertDialogCancel>
+          <Button variant="destructive" onClick={() => deleteTodo(id)}>
+            삭제
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
+
+export default TodoDeleteButton;
